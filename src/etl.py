@@ -1,5 +1,4 @@
 import pandas as pd
-import os
 
 def load_data(raw_path):
     """carga el dataset original desde una ruta dada"""

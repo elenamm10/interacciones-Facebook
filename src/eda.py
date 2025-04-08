@@ -44,6 +44,16 @@ def analyze_viral_posts(df):
     )
     return summary
 
+def plot_interactions_by_weekday(df):
+    """genera un boxplot de las interacciones en función del día de la semana"""
+    plt.figure(figsize=(10, 6))
+    sns.boxplot(data=df, x='post_weekday', y='total_interactions')
+    plt.title("Interacciones por día de la semana")
+    plt.xlabel("Día de la semana")
+    plt.ylabel("Total de interacciones")
+    plt.tight_layout()
+    plt.show()
+
 def plot_interactions_by_type(df):
     """muestra boxplot de interacciones por tipo de publicación"""
     sns.boxplot(data=df, x='type', y='total_interactions')

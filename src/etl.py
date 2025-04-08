@@ -34,17 +34,3 @@ def handle_missing_values(df):
 def save_data(df, processed_path):
     """guarda el dataset limpio en la ruta especificada"""
     df.to_csv(processed_path, sep=';', index=False)
-
-def main():
-    raw_path = "data/raw/dataset_Facebook.csv"
-    processed_path = "data/processed/dataset_limpio.csv"
-
-    df = load_data(raw_path)
-    df = clean_columns(df)
-    df = transform_data(df)
-    df = handle_missing_values(df)
-    save_data(df, processed_path)
-    print(f"Dataset limpio guardado en: {processed_path}")
-
-if __name__ == "__main__":
-    main()

@@ -2,14 +2,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-processed_path = "/Users/elena/Downloads/Data_science/proyectos/proyecto_I/interacciones-Facebook/data/dataset_limpio.csv"
-
 # estilo general para las visualizaciones
 sns.set(style="whitegrid")
 plt.rcParams['figure.figsize'] = (10, 6)
 
 # carga del dataset limpio
-def carga_revision(processed_path):
+def carga_revision(df=None):
+    processed_path = "/Users/elena/Downloads/Data_science/proyectos/proyecto_I/interacciones-Facebook/data/dataset_limpio.csv"
     df = pd.read_csv(processed_path, sep=";")
     cat_columns = ['post_month', 'post_weekday', 'post_hour', 'paid']
     for col in cat_columns:
@@ -23,8 +22,9 @@ def distribucion_cat(df):
         plt.title(f"Distribución de {col}")
         plt.xticks(rotation=45)
         plt.tight_layout()
-        plt.savefig(f"../outputs/distribucion_de_{col}.png")
+        plt.savefig(f"outputs/distribucion_de_{col}.png")
         plt.close()
+    return df
 
 # muestra histogramas para variables numéricas relevantes
 def distribucion_num(df):
@@ -34,8 +34,9 @@ def distribucion_num(df):
         sns.histplot(df[col], kde=True, bins=30)
         plt.title(f"Distribución de {col}")
         plt.tight_layout()
-        plt.savefig(f"../outputs/distribucion_de_{col}.png")
+        plt.savefig(f"outputs/distribucion_de_{col}.png")
         plt.close()
+    return df
 
 # muestra boxplot de interacciones por día de la semana
 def box_dia(df):
@@ -45,16 +46,18 @@ def box_dia(df):
     plt.xlabel("Día de la semana")
     plt.ylabel("Total de interacciones")
     plt.tight_layout()
-    plt.savefig("../outputs/intercciones_por_dia.png")
+    plt.savefig("outputs/intercciones_por_dia.png")
     plt.close()
+    return df
 
 # muestra boxplot de interacciones por tipo de publicación
 def box_tipo(df):
     sns.boxplot(data=df, x='type', y='total_interactions')
     plt.title("Total de interacciones por tipo de publicación")
     plt.tight_layout()
-    plt.savefig("../outputs/intercciones_por_tipo.png")
+    plt.savefig("outputs/intercciones_por_tipo.png")
     plt.close()
+    return df
 
 # muestra promedio de interaciionnes por hora
 def media_hora(df):
@@ -64,8 +67,9 @@ def media_hora(df):
     plt.xlabel("Hora")
     plt.ylabel("Interacciones promedio")
     plt.tight_layout()
-    plt.savefig("../outputs/promedio_intercciones_por_hora.png")
+    plt.savefig("outputs/promedio_intercciones_por_hora.png")
     plt.close()
+    return df
 
 # compara interacciones promedio entre publicaciones promocionadas y orgánicas
 def media_paid(df):
@@ -75,8 +79,9 @@ def media_paid(df):
     plt.ylabel("Total de interacciones promedio")
     plt.xticks([0, 1], ['No promocionado', 'Promocionado'])
     plt.tight_layout()
-    plt.savefig("../outputs/promedio_intercciones_segun_promocion.png")
+    plt.savefig("outputs/promedio_intercciones_segun_promocion.png")
     plt.close()
+    return df
 
 # muestra la matriz de correlación entre variables numéricas
 def matriz_corr(df):
@@ -85,12 +90,12 @@ def matriz_corr(df):
     sns.heatmap(corr, annot=True, cmap='coolwarm', fmt=".2f")
     plt.title("Matriz de Correlación")
     plt.tight_layout()
-    plt.savefig("../outputs/matriz_correlacion.png")
+    plt.savefig("outputs/matriz_correlacion.png")
     plt.close()
-
+    return df
 
 # función principal para ejecutar el análisis exploratorio completo
-def run_eda_pipeline():
+def run_eda_pipeline(df):
     df = None
     df = carga_revision(df)
     df = distribucion_cat(df)

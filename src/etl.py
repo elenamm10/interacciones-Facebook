@@ -1,9 +1,8 @@
 import pandas as pd
-raw_path = "/Users/elena/Downloads/Data_science/proyectos/proyecto_I/interacciones-Facebook/data/dataset_Facebook.csv"
-processed_path = "/Users/elena/Downloads/Data_science/proyectos/proyecto_I/interacciones-Facebook/data/dataset_limpio.csv"
 
 # carga del dataset original
-def carga(raw_path):
+def carga(df=None):
+    raw_path = "/Users/elena/Downloads/Data_science/proyectos/proyecto_I/interacciones-Facebook/data/dataset_Facebook.csv"
     df = pd.read_csv(raw_path, sep=';')
     return df
 
@@ -57,7 +56,8 @@ def var_viral(df):
     return df
 
 # guarda el dataset limpio en la ruta especificada
-def guardado(df, processed_path):
+def guardado(df):
+    processed_path = "/Users/elena/Downloads/Data_science/proyectos/proyecto_I/interacciones-Facebook/data/dataset_limpio.csv"
     df.to_csv(processed_path, sep=';', index=False)
 
 # función principal que ejecuta el pipeline ETL

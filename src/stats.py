@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from scipy.stats import shapiro, levene, kruskal
+import scikit_posthocs as sp
+from scipy.stats import shapiro, levene, ttest_ind, mannwhitneyu, kruskal
 from statsmodels.formula.api import ols, logit
 from statsmodels.stats.anova import anova_lm
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
@@ -13,6 +14,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, classification_report, roc_curve, auc
 from sklearn.tree import DecisionTreeClassifier, plot_tree
+
 
 
 # --- CONTRASTES DE HIPÓTESIS ---
@@ -60,7 +62,7 @@ def dun_dia(df):
     dunn = sp.posthoc_dunn(df, val_col="total_interactions", group_col="post_weekday", p_adjust="holm")
     print("Test de Dunn (p-values ajustados):")
     print(dunn.round(4))
-    dunn.to_csv("../outputs/dunn_posthoc.csv")
+    dunn.to_csv("outputs/dunn_posthoc.csv")
     return df
 
 
@@ -134,7 +136,7 @@ def curva_roc(df):
     plt.legend()
     plt.grid(True)
     plt.tight_layout()
-    plt.savefig("../outputs/roc_logistica.png")
+    plt.savefig("outputs/roc_logistica.png")
     plt.close()
     return df
 
@@ -161,7 +163,7 @@ def arbol(df):
     )
     plt.title("Árbol de decisión")
     plt.tight_layout()
-    plt.savefig("../outputs/arbol_decision.png")
+    plt.savefig("outputs/arbol_decision.png")
     plt.close()
     return df
 

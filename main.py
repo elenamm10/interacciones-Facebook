@@ -1,6 +1,6 @@
-from etl import run_etl_pipeline
-from eda import run_eda_pipeline
-from stats import run_stats_pipeline
+from src.etl import run_etl_pipeline
+from src.eda import run_eda_pipeline
+from src.stats import run_stats_pipeline
 
 def main():
     print("Iniciando pipeline completo del proyecto...")
